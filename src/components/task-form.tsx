@@ -25,20 +25,25 @@ import {
 } from "@/lib/schemas";
 import { useTRPC } from "@/trpc/client";
 
-export function TaskForm() {
+type Props = {
+  tarefa?: { id: string; titulo: string; descricao?: string };
+};
+
+export function TaskForm({ tarefa }: Props) {
   const trpc = useTRPC();
   const router = useRouter();
   const cache = useCacheDeTarefas();
   const t = useTranslations("formulario");
   const traduzir = useTraduzirErro();
   const criar = useMutation(trpc.tarefa.criar.mutationOptions());
+  const atualizar = useMutation(trpc.tarefa.atualizar.mutationOptions());
 
   const [valores, setValores] = useState<Required<TarefaInput>>({
-    titulo: "",
-    descricao: "",
+    titulo: tarefa?.titulo ?? "",
+    descricao: tarefa?.descricao ?? "",
   });
   const [erros, setErros] = useState<CamposComErro>({});
-  const salvando = criar.isPending;
+  const salvando = criar.isPending || atualizar.isPending;
 
   const alterar =
     (campo: keyof TarefaInput) =>
@@ -56,8 +61,10 @@ export function TaskForm() {
     }
 
     try {
-      await criar.mutateAsync(resultado.data);
-      toast.success(t("criada"));
+      if (tarefa)
+        await atualizar.mutateAsync({ id: tarefa.id, ...resultado.data });
+      else await criar.mutateAsync(resultado.data);
+      toast.success(t(tarefa ? "atualizada" : "criada"));
       cache.descartar();
       router.push("/");
     } catch (erro) {
@@ -111,7 +118,7 @@ export function TaskForm() {
           </Button>
           <Button type="submit" disabled={salvando}>
             {salvando && <Loader2 className="animate-spin" />}
-            {t(salvando ? "salvando" : "criar")}
+            {t(salvando ? "salvando" : tarefa ? "salvar" : "criar")}
           </Button>
         </div>
       </form>

@@ -16,6 +16,7 @@
   },
   "tarefa": {
     "criadaEm": "Criada em {data}",
+    "editar": "Editar tarefa",
     "excluir": "Excluir tarefa"
   },
   "exclusao": {
@@ -28,6 +29,8 @@
   "formulario": {
     "novaTitulo": "Nova tarefa",
     "novaDescricao": "Preencha os dados da tarefa.",
+    "editarTitulo": "Editar tarefa",
+    "editarDescricao": "Altere os dados e salve.",
     "voltar": "Voltar para a lista",
     "titulo": "Título",
     "descricao": "Descrição",
@@ -35,8 +38,10 @@
     "placeholderDescricao": "Detalhes opcionais sobre a tarefa",
     "cancelar": "Cancelar",
     "criar": "Criar tarefa",
+    "salvar": "Salvar alterações",
     "salvando": "Salvando...",
-    "criada": "Tarefa criada"
+    "criada": "Tarefa criada",
+    "atualizada": "Tarefa atualizada"
   },
   "validacao": {
     "tituloObrigatorio": "Título é obrigatório",
