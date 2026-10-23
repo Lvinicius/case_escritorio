@@ -70,5 +70,8 @@
     "algoErrado": "Algo deu errado",
     "naoCarregou": "Não foi possível carregar esta página.",
     "tentarNovamente": "Tentar novamente"
+  },
+  "preferencias": {
+    "alternarTema": "Alternar tema claro/escuro"
   }
 }
