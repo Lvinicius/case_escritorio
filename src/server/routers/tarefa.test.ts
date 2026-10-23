@@ -27,6 +27,7 @@ describe("tarefa.criar", () => {
       descricao: "Ler a documentação",
     });
     expect(tarefa.id).toBeTruthy();
+    expect(tarefa.concluida).toBe(false);
     expect(tarefa.dataCriacao).toBeInstanceOf(Date);
   });
 
@@ -95,6 +96,15 @@ describe("tarefa.atualizar", () => {
     expect(
       await codigoDoErro(api.atualizar({ id: "inexistente", titulo: "X" })),
     ).toBe("NOT_FOUND");
+  });
+
+  it("marca e desmarca como concluída", async () => {
+    const { id } = await api.criar({ titulo: "Tarefa" });
+
+    expect((await api.atualizar({ id, concluida: true })).concluida).toBe(true);
+    expect((await api.atualizar({ id, concluida: false })).concluida).toBe(
+      false,
+    );
   });
 
   it("rejeita título vazio", async () => {

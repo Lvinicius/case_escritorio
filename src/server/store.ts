@@ -9,6 +9,7 @@ export type Tarefa = {
   id: string;
   titulo: string;
   descricao?: string;
+  concluida: boolean;
   dataCriacao: Date;
 };
 
@@ -50,6 +51,7 @@ export class TarefaStore {
       id: randomUUID(),
       titulo,
       descricao: descricao || undefined,
+      concluida: false,
       dataCriacao: this.proximaData(),
     };
     this.tarefas.set(tarefa.id, tarefa);

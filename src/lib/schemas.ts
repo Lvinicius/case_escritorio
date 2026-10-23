@@ -15,7 +15,9 @@ export const tarefaInput = z.object({
 
 export const idInput = z.object({ id: z.string().min(1) });
 
-export const atualizarTarefaInput = tarefaInput.partial().extend(idInput.shape);
+export const atualizarTarefaInput = tarefaInput
+  .partial()
+  .extend({ ...idInput.shape, concluida: z.boolean().optional() });
 
 export const listarTarefasInput = z.object({
   cursor: z.number().nullish(),

@@ -17,7 +17,9 @@
   "tarefa": {
     "criadaEm": "Criada em {data}",
     "editar": "Editar tarefa",
-    "excluir": "Excluir tarefa"
+    "excluir": "Excluir tarefa",
+    "marcarConcluida": "Marcar como concluída",
+    "marcarPendente": "Marcar como pendente"
   },
   "exclusao": {
     "titulo": "Excluir tarefa?",
