@@ -1,10 +1,13 @@
 import { initTRPC } from "@trpc/server";
 import superjson from "superjson";
 import { ZodError, z } from "zod";
+import { tarefaStore, type TarefaStore } from "./store";
 
-export const createTRPCContext = async () => ({});
+export type Context = { store: TarefaStore };
 
-export type Context = Awaited<ReturnType<typeof createTRPCContext>>;
+export const createTRPCContext = async (): Promise<Context> => ({
+  store: tarefaStore,
+});
 
 const t = initTRPC.context<Context>().create({
   transformer: superjson,
