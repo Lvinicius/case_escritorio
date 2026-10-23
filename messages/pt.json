@@ -6,10 +6,12 @@
   "lista": {
     "titulo": "Minhas tarefas",
     "subtitulo": "Organize o seu dia, uma tarefa por vez.",
+    "novaTarefa": "Nova tarefa",
     "carregandoMais": "Carregando mais tarefas...",
     "fim": "Você chegou ao fim da lista.",
     "vazioTitulo": "Nenhuma tarefa por aqui",
     "vazioTexto": "Crie a sua primeira tarefa para começar.",
+    "criarTarefa": "Criar tarefa",
     "carregando": "Carregando"
   },
   "tarefa": {
@@ -24,7 +26,22 @@
     "sucesso": "Tarefa excluída"
   },
   "formulario": {
-    "voltar": "Voltar para a lista"
+    "novaTitulo": "Nova tarefa",
+    "novaDescricao": "Preencha os dados da tarefa.",
+    "voltar": "Voltar para a lista",
+    "titulo": "Título",
+    "descricao": "Descrição",
+    "placeholderTitulo": "Ex.: Revisar o relatório mensal",
+    "placeholderDescricao": "Detalhes opcionais sobre a tarefa",
+    "cancelar": "Cancelar",
+    "criar": "Criar tarefa",
+    "salvando": "Salvando...",
+    "criada": "Tarefa criada"
+  },
+  "validacao": {
+    "tituloObrigatorio": "Título é obrigatório",
+    "tituloMax": "Título deve ter no máximo {tituloMax} caracteres",
+    "descricaoMax": "Descrição deve ter no máximo {descricaoMax} caracteres"
   },
   "erros": {
     "naoEncontrada": "Tarefa não encontrada",
