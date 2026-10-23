@@ -6,6 +6,8 @@
   "lista": {
     "titulo": "Minhas tarefas",
     "subtitulo": "Organize o seu dia, uma tarefa por vez.",
+    "carregandoMais": "Carregando mais tarefas...",
+    "fim": "Você chegou ao fim da lista.",
     "vazioTitulo": "Nenhuma tarefa por aqui",
     "vazioTexto": "Crie a sua primeira tarefa para começar.",
     "carregando": "Carregando"
