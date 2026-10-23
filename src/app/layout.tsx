@@ -4,6 +4,7 @@ import { NextIntlClientProvider } from "next-intl";
 import { getLocale, getTranslations } from "next-intl/server";
 import { Geist } from "next/font/google";
 import Link from "next/link";
+import { Toaster } from "@/components/toaster";
 import { TRPCReactProvider } from "@/trpc/client";
 import "./globals.css";
 
@@ -46,6 +47,7 @@ export default async function RootLayout({
               </nav>
               <main className="mx-auto max-w-2xl px-4 py-10">{children}</main>
             </div>
+            <Toaster />
           </TRPCReactProvider>
         </NextIntlClientProvider>
       </body>
