@@ -1,0 +1,37 @@
+{
+  "app": {
+    "nome": "Tarefas",
+    "descricao": "Gerenciador de tarefas simples com Next.js e tRPC"
+  },
+  "lista": {
+    "titulo": "Minhas tarefas",
+    "subtitulo": "Organize o seu dia, uma tarefa por vez.",
+    "carregandoMais": "Carregando mais tarefas...",
+    "fim": "Você chegou ao fim da lista.",
+    "vazioTitulo": "Nenhuma tarefa por aqui",
+    "vazioTexto": "Crie a sua primeira tarefa para começar.",
+    "carregando": "Carregando"
+  },
+  "tarefa": {
+    "criadaEm": "Criada em {data}",
+    "excluir": "Excluir tarefa"
+  },
+  "exclusao": {
+    "titulo": "Excluir tarefa?",
+    "descricao": "“{titulo}” será removida da lista.",
+    "cancelar": "Cancelar",
+    "confirmar": "Excluir",
+    "sucesso": "Tarefa excluída"
+  },
+  "formulario": {
+    "voltar": "Voltar para a lista"
+  },
+  "erros": {
+    "naoEncontrada": "Tarefa não encontrada",
+    "naoEncontradaTexto": "Ela pode ter sido excluída ou o link está incorreto.",
+    "generico": "Não foi possível concluir a operação. Tente novamente.",
+    "algoErrado": "Algo deu errado",
+    "naoCarregou": "Não foi possível carregar esta página.",
+    "tentarNovamente": "Tentar novamente"
+  }
+}
