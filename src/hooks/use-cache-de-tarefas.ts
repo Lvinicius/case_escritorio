@@ -8,5 +8,7 @@ export function useCacheDeTarefas() {
 
   return {
     invalidar: () => queryClient.invalidateQueries(filtro),
+    // Fora da listagem, descartar o cache evita exibir dados antigos antes do SSR hidratar os novos.
+    descartar: () => queryClient.removeQueries(filtro),
   };
 }

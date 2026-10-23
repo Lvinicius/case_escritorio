@@ -1,6 +1,9 @@
+import { Plus } from "lucide-react";
 import { getTranslations } from "next-intl/server";
+import Link from "next/link";
 import { PageHeader } from "@/components/page-header";
 import { TaskList } from "@/components/task-list";
+import { Button } from "@/components/ui/button";
 import { getNextPageParam, LISTAGEM_INPUT } from "@/lib/listagem";
 import { getQueryClient, HydrateClient, trpc } from "@/trpc/server";
 
@@ -17,7 +20,17 @@ export default async function HomePage() {
 
   return (
     <HydrateClient>
-      <PageHeader titulo={t("titulo")} descricao={t("subtitulo")} />
+      <PageHeader
+        titulo={t("titulo")}
+        descricao={t("subtitulo")}
+        acao={
+          <Button asChild>
+            <Link href="/tarefas/nova">
+              <Plus /> {t("novaTarefa")}
+            </Link>
+          </Button>
+        }
+      />
       <TaskList />
     </HydrateClient>
   );

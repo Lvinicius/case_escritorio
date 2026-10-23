@@ -1,9 +1,11 @@
 "use client";
 
 import { useSuspenseInfiniteQuery } from "@tanstack/react-query";
-import { ClipboardList, Loader2 } from "lucide-react";
+import { ClipboardList, Loader2, Plus } from "lucide-react";
 import { useTranslations } from "next-intl";
+import Link from "next/link";
 import { TaskCard } from "@/components/task-card";
+import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { useInfiniteScroll } from "@/hooks/use-infinite-scroll";
 import {
@@ -67,6 +69,11 @@ function ListaVazia() {
         <h2 className="font-semibold">{t("vazioTitulo")}</h2>
         <p className="text-muted-foreground text-sm">{t("vazioTexto")}</p>
       </div>
+      <Button asChild className="mt-2">
+        <Link href="/tarefas/nova">
+          <Plus /> {t("criarTarefa")}
+        </Link>
+      </Button>
     </Card>
   );
 }

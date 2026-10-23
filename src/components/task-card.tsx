@@ -1,8 +1,10 @@
 "use client";
 
-import { CalendarClock } from "lucide-react";
+import { CalendarClock, Pencil } from "lucide-react";
 import { useFormatter, useTranslations } from "next-intl";
+import Link from "next/link";
 import { DeleteTaskButton } from "@/components/delete-task-button";
+import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { useExcluirTarefa } from "@/hooks/use-excluir-tarefa";
 import { cn } from "@/lib/utils";
@@ -39,6 +41,11 @@ export function TaskCard({ tarefa }: { tarefa: Tarefa }) {
           </p>
         </div>
         <div className="flex shrink-0 gap-1">
+          <Button asChild variant="ghost" size="icon" aria-label={t("editar")}>
+            <Link href={`/tarefas/${tarefa.id}/editar`}>
+              <Pencil />
+            </Link>
+          </Button>
           <DeleteTaskButton
             titulo={tarefa.titulo}
             excluindo={excluir.isPending}
