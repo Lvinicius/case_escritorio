@@ -1,6 +1,7 @@
 import { randomUUID } from "node:crypto";
 import type {
   AtualizarTarefaInput,
+  Filtro,
   ListarTarefasInput,
   TarefaInput,
 } from "@/lib/schemas";
@@ -17,6 +18,7 @@ export type PaginaDeTarefas = {
   itens: Tarefa[];
   nextCursor: number | null;
   total: number;
+  concluidas: number;
 };
 
 export class TarefaStore {
@@ -25,11 +27,11 @@ export class TarefaStore {
   private removidas = new Map<string, Tarefa>();
   private ultimaCriacao = 0;
 
-  list({ cursor, limit }: ListarTarefasInput): PaginaDeTarefas {
+  list({ cursor, filtro, limit }: ListarTarefasInput): PaginaDeTarefas {
     const todas = [...this.tarefas.values()];
-    const recentesPrimeiro = todas.sort(
-      (a, b) => b.dataCriacao.getTime() - a.dataCriacao.getTime(),
-    );
+    const recentesPrimeiro = todas
+      .filter(atendeAoFiltro[filtro])
+      .sort((a, b) => b.dataCriacao.getTime() - a.dataCriacao.getTime());
     const restantes =
       cursor == null
         ? recentesPrimeiro
@@ -41,6 +43,7 @@ export class TarefaStore {
       itens,
       nextCursor: temMais ? itens.at(-1)!.dataCriacao.getTime() : null,
       total: todas.length,
+      concluidas: todas.filter((t) => t.concluida).length,
     };
   }
 
@@ -96,6 +99,12 @@ export class TarefaStore {
     return new Date(this.ultimaCriacao);
   }
 }
+
+const atendeAoFiltro: Record<Filtro, (tarefa: Tarefa) => boolean> = {
+  todas: () => true,
+  pendentes: (tarefa) => !tarefa.concluida,
+  concluidas: (tarefa) => tarefa.concluida,
+};
 
 // Mantém os dados entre os hot reloads do `next dev`.
 const globalComStore = globalThis as typeof globalThis & {

@@ -12,7 +12,18 @@
     "vazioTitulo": "Nenhuma tarefa por aqui",
     "vazioTexto": "Crie a sua primeira tarefa para começar.",
     "criarTarefa": "Criar tarefa",
-    "carregando": "Carregando"
+    "carregando": "Carregando",
+    "vazioFiltro": {
+      "todas": "Nenhuma tarefa por aqui.",
+      "pendentes": "Nenhuma tarefa pendente. Tudo em dia!",
+      "concluidas": "Nenhuma tarefa concluída ainda."
+    }
+  },
+  "filtros": {
+    "rotulo": "Filtrar tarefas",
+    "todas": "Todas",
+    "pendentes": "Pendentes",
+    "concluidas": "Concluídas"
   },
   "tarefa": {
     "criadaEm": "Criada em {data}",

@@ -5,22 +5,24 @@ import { ClipboardList, Loader2, Plus } from "lucide-react";
 import { useTranslations } from "next-intl";
 import Link from "next/link";
 import { TaskCard } from "@/components/task-card";
+import { TaskFilters } from "@/components/task-filters";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { useInfiniteScroll } from "@/hooks/use-infinite-scroll";
 import {
   getNextPageParam,
-  LISTAGEM_INPUT,
+  inputDaListagem,
   TAMANHO_DA_PAGINA,
 } from "@/lib/listagem";
+import type { Filtro } from "@/lib/schemas";
 import { useTRPC } from "@/trpc/client";
 
-export function TaskList() {
+export function TaskList({ filtro }: { filtro: Filtro }) {
   const trpc = useTRPC();
   const t = useTranslations("lista");
   const { data, fetchNextPage, hasNextPage, isFetchingNextPage } =
     useSuspenseInfiniteQuery(
-      trpc.tarefa.listar.infiniteQueryOptions(LISTAGEM_INPUT, {
+      trpc.tarefa.listar.infiniteQueryOptions(inputDaListagem(filtro), {
         getNextPageParam,
       }),
     );
@@ -30,11 +32,18 @@ export function TaskList() {
   );
 
   const tarefas = data.pages.flatMap((pagina) => pagina.itens);
+  const { total, concluidas } = data.pages[0];
 
-  if (tarefas.length === 0) return <ListaVazia />;
+  if (total === 0) return <ListaVazia />;
 
   return (
     <section className="space-y-3">
+      <TaskFilters atual={filtro} total={total} concluidas={concluidas} />
+      {tarefas.length === 0 && (
+        <p className="text-muted-foreground rounded-xl border border-dashed px-6 py-10 text-center text-sm">
+          {t(`vazioFiltro.${filtro}`)}
+        </p>
+      )}
       <ul className="space-y-3">
         {tarefas.map((tarefa) => (
           <li key={tarefa.id}>
