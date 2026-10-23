@@ -5,6 +5,7 @@ import { getLocale, getTranslations } from "next-intl/server";
 import { ThemeProvider } from "next-themes";
 import { Geist } from "next/font/google";
 import Link from "next/link";
+import { LanguageSwitcher } from "@/components/language-switcher";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { Toaster } from "@/components/toaster";
 import { TRPCReactProvider } from "@/trpc/client";
@@ -52,6 +53,7 @@ export default async function RootLayout({
                       {t("nome")}
                     </Link>
                     <div className="flex items-center gap-1">
+                      <LanguageSwitcher />
                       <ThemeToggle />
                     </div>
                   </div>

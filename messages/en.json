@@ -1,0 +1,83 @@
+{
+  "app": {
+    "nome": "Tasks",
+    "descricao": "Simple task manager built with Next.js and tRPC"
+  },
+  "lista": {
+    "titulo": "My tasks",
+    "subtitulo": "Organize your day, one task at a time.",
+    "novaTarefa": "New task",
+    "carregandoMais": "Loading more tasks...",
+    "fim": "You have reached the end of the list.",
+    "vazioTitulo": "No tasks here yet",
+    "vazioTexto": "Create your first task to get started.",
+    "criarTarefa": "Create task",
+    "carregando": "Loading",
+    "vazioFiltro": {
+      "todas": "No tasks here.",
+      "pendentes": "No pending tasks. All caught up!",
+      "concluidas": "No completed tasks yet."
+    }
+  },
+  "filtros": {
+    "rotulo": "Filter tasks",
+    "todas": "All",
+    "pendentes": "Pending",
+    "concluidas": "Completed"
+  },
+  "tarefa": {
+    "criadaEm": "Created on {data}",
+    "editar": "Edit task",
+    "excluir": "Delete task",
+    "marcarConcluida": "Mark as completed",
+    "marcarPendente": "Mark as pending"
+  },
+  "exclusao": {
+    "titulo": "Delete task?",
+    "descricao": "“{titulo}” will be removed from the list.",
+    "cancelar": "Cancel",
+    "confirmar": "Delete",
+    "sucesso": "Task deleted",
+    "desfazer": "Undo",
+    "restaurada": "Task restored"
+  },
+  "formulario": {
+    "novaTitulo": "New task",
+    "novaDescricao": "Fill in the task details.",
+    "editarTitulo": "Edit task",
+    "editarDescricao": "Change the details and save.",
+    "voltar": "Back to the list",
+    "titulo": "Title",
+    "descricao": "Description",
+    "placeholderTitulo": "E.g.: Review the monthly report",
+    "placeholderDescricao": "Optional details about the task",
+    "cancelar": "Cancel",
+    "criar": "Create task",
+    "salvar": "Save changes",
+    "salvando": "Saving...",
+    "criada": "Task created",
+    "atualizada": "Task updated"
+  },
+  "validacao": {
+    "tituloObrigatorio": "Title is required",
+    "tituloMax": "Title must be at most {tituloMax} characters",
+    "descricaoMax": "Description must be at most {descricaoMax} characters"
+  },
+  "erros": {
+    "naoEncontrada": "Task not found",
+    "naoEncontradaTexto": "It may have been deleted or the link is incorrect.",
+    "generico": "The operation could not be completed. Please try again.",
+    "algoErrado": "Something went wrong",
+    "naoCarregou": "This page could not be loaded.",
+    "tentarNovamente": "Try again"
+  },
+  "preferencias": {
+    "alternarTema": "Toggle light/dark theme",
+    "idioma": "Language",
+    "idiomas": {
+      "pt": "Portuguese",
+      "en": "English",
+      "es": "Spanish"
+    }
+  }
+}

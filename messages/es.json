@@ -1,0 +1,83 @@
+{
+  "app": {
+    "nome": "Tareas",
+    "descricao": "Gestor de tareas sencillo con Next.js y tRPC"
+  },
+  "lista": {
+    "titulo": "Mis tareas",
+    "subtitulo": "Organiza tu día, una tarea a la vez.",
+    "novaTarefa": "Nueva tarea",
+    "carregandoMais": "Cargando más tareas...",
+    "fim": "Llegaste al final de la lista.",
+    "vazioTitulo": "No hay tareas por aquí",
+    "vazioTexto": "Crea tu primera tarea para empezar.",
+    "criarTarefa": "Crear tarea",
+    "carregando": "Cargando",
+    "vazioFiltro": {
+      "todas": "No hay tareas aquí.",
+      "pendentes": "No hay tareas pendientes. ¡Todo al día!",
+      "concluidas": "Aún no hay tareas completadas."
+    }
+  },
+  "filtros": {
+    "rotulo": "Filtrar tareas",
+    "todas": "Todas",
+    "pendentes": "Pendientes",
+    "concluidas": "Completadas"
+  },
+  "tarefa": {
+    "criadaEm": "Creada el {data}",
+    "editar": "Editar tarea",
+    "excluir": "Eliminar tarea",
+    "marcarConcluida": "Marcar como completada",
+    "marcarPendente": "Marcar como pendiente"
+  },
+  "exclusao": {
+    "titulo": "¿Eliminar tarea?",
+    "descricao": "“{titulo}” se quitará de la lista.",
+    "cancelar": "Cancelar",
+    "confirmar": "Eliminar",
+    "sucesso": "Tarea eliminada",
+    "desfazer": "Deshacer",
+    "restaurada": "Tarea restaurada"
+  },
+  "formulario": {
+    "novaTitulo": "Nueva tarea",
+    "novaDescricao": "Completa los datos de la tarea.",
+    "editarTitulo": "Editar tarea",
+    "editarDescricao": "Modifica los datos y guarda.",
+    "voltar": "Volver a la lista",
+    "titulo": "Título",
+    "descricao": "Descripción",
+    "placeholderTitulo": "Ej.: Revisar el informe mensual",
+    "placeholderDescricao": "Detalles opcionales sobre la tarea",
+    "cancelar": "Cancelar",
+    "criar": "Crear tarea",
+    "salvar": "Guardar cambios",
+    "salvando": "Guardando...",
+    "criada": "Tarea creada",
+    "atualizada": "Tarea actualizada"
+  },
+  "validacao": {
+    "tituloObrigatorio": "El título es obligatorio",
+    "tituloMax": "El título debe tener como máximo {tituloMax} caracteres",
+    "descricaoMax": "La descripción debe tener como máximo {descricaoMax} caracteres"
+  },
+  "erros": {
+    "naoEncontrada": "Tarea no encontrada",
+    "naoEncontradaTexto": "Puede haber sido eliminada o el enlace es incorrecto.",
+    "generico": "No se pudo completar la operación. Inténtalo de nuevo.",
+    "algoErrado": "Algo salió mal",
+    "naoCarregou": "No se pudo cargar esta página.",
+    "tentarNovamente": "Intentar de nuevo"
+  },
+  "preferencias": {
+    "alternarTema": "Cambiar tema claro/oscuro",
+    "idioma": "Idioma",
+    "idiomas": {
+      "pt": "Portugués",
+      "en": "Inglés",
+      "es": "Español"
+    }
+  }
+}

@@ -72,6 +72,12 @@
     "tentarNovamente": "Tentar novamente"
   },
   "preferencias": {
-    "alternarTema": "Alternar tema claro/escuro"
+    "alternarTema": "Alternar tema claro/escuro",
+    "idioma": "Idioma",
+    "idiomas": {
+      "pt": "Português",
+      "en": "Inglês",
+      "es": "Espanhol"
+    }
   }
 }
