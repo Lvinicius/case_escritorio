@@ -5,9 +5,22 @@
   },
   "lista": {
     "titulo": "Minhas tarefas",
-    "subtitulo": "Organize o seu dia, uma tarefa por vez."
+    "subtitulo": "Organize o seu dia, uma tarefa por vez.",
+    "vazioTitulo": "Nenhuma tarefa por aqui",
+    "vazioTexto": "Crie a sua primeira tarefa para começar.",
+    "carregando": "Carregando"
+  },
+  "tarefa": {
+    "criadaEm": "Criada em {data}"
   },
   "formulario": {
     "voltar": "Voltar para a lista"
+  },
+  "erros": {
+    "naoEncontrada": "Tarefa não encontrada",
+    "naoEncontradaTexto": "Ela pode ter sido excluída ou o link está incorreto.",
+    "algoErrado": "Algo deu errado",
+    "naoCarregou": "Não foi possível carregar esta página.",
+    "tentarNovamente": "Tentar novamente"
   }
 }
