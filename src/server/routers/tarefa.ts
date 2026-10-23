@@ -36,4 +36,10 @@ export const tarefaRouter = router({
     if (!ctx.store.remove(input.id)) throw tarefaNaoEncontrada();
     return { id: input.id };
   }),
+
+  restaurar: publicProcedure
+    .input(idInput)
+    .mutation(({ ctx, input }) =>
+      garantirExistencia(ctx.store.restore(input.id)),
+    ),
 });

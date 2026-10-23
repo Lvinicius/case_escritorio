@@ -26,7 +26,9 @@
     "descricao": "“{titulo}” será removida da lista.",
     "cancelar": "Cancelar",
     "confirmar": "Excluir",
-    "sucesso": "Tarefa excluída"
+    "sucesso": "Tarefa excluída",
+    "desfazer": "Desfazer",
+    "restaurada": "Tarefa restaurada"
   },
   "formulario": {
     "novaTitulo": "Nova tarefa",

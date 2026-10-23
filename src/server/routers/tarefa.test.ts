@@ -115,7 +115,7 @@ describe("tarefa.atualizar", () => {
   });
 });
 
-describe("tarefa.deletar e buscarPorId", () => {
+describe("tarefa.deletar, restaurar e buscarPorId", () => {
   it("remove a tarefa", async () => {
     const { id } = await api.criar({ titulo: "Temporária" });
 
@@ -127,5 +127,20 @@ describe("tarefa.deletar e buscarPorId", () => {
     expect(await codigoDoErro(api.deletar({ id: "inexistente" }))).toBe(
       "NOT_FOUND",
     );
+  });
+
+  it("restaura a tarefa excluída na mesma posição", async () => {
+    const antiga = await api.criar({ titulo: "Antiga" });
+    await api.criar({ titulo: "Nova" });
+    await api.deletar({ id: antiga.id });
+
+    expect(await api.restaurar({ id: antiga.id })).toEqual(antiga);
+    const { itens } = await api.listar({ limit: 10 });
+    expect(itens.map((t) => t.titulo)).toEqual(["Nova", "Antiga"]);
+  });
+
+  it("retorna NOT_FOUND ao restaurar tarefa que não foi excluída", async () => {
+    const { id } = await api.criar({ titulo: "Ativa" });
+    expect(await codigoDoErro(api.restaurar({ id }))).toBe("NOT_FOUND");
   });
 });

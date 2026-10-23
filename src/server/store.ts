@@ -21,6 +21,8 @@ export type PaginaDeTarefas = {
 
 export class TarefaStore {
   private tarefas = new Map<string, Tarefa>();
+  // Guardadas para permitir desfazer a exclusão.
+  private removidas = new Map<string, Tarefa>();
   private ultimaCriacao = 0;
 
   list({ cursor, limit }: ListarTarefasInput): PaginaDeTarefas {
@@ -70,7 +72,21 @@ export class TarefaStore {
   }
 
   remove(id: string) {
-    return this.tarefas.delete(id);
+    const tarefa = this.tarefas.get(id);
+    if (!tarefa) return false;
+
+    this.tarefas.delete(id);
+    this.removidas.set(id, tarefa);
+    return true;
+  }
+
+  restore(id: string) {
+    const tarefa = this.removidas.get(id);
+    if (!tarefa) return undefined;
+
+    this.removidas.delete(id);
+    this.tarefas.set(id, tarefa);
+    return tarefa;
   }
 
   // Datas estritamente crescentes tornam dataCriacao um cursor único e estável,
