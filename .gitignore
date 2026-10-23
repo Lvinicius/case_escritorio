@@ -1,0 +1,29 @@
+# dependências
+/node_modules
+
+# build
+/.next/
+/out/
+/build
+*.tsbuildinfo
+next-env.d.ts
+
+# testes
+/coverage
+
+# variáveis de ambiente e chaves
+.env*
+*.pem
+*.key
+
+# logs
+*.log
+
+# deploy
+.vercel
+
+# editores e sistema
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
