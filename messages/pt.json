@@ -1,0 +1,13 @@
+{
+  "app": {
+    "nome": "Tarefas",
+    "descricao": "Gerenciador de tarefas simples com Next.js e tRPC"
+  },
+  "lista": {
+    "titulo": "Minhas tarefas",
+    "subtitulo": "Organize o seu dia, uma tarefa por vez."
+  },
+  "formulario": {
+    "voltar": "Voltar para a lista"
+  }
+}
