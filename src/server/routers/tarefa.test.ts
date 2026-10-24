@@ -27,6 +27,7 @@ describe("tarefa.criar", () => {
       descricao: "Ler a documentação",
     });
     expect(tarefa.id).toBeTruthy();
+    expect(tarefa.concluida).toBe(false);
     expect(tarefa.dataCriacao).toBeInstanceOf(Date);
   });
 
@@ -67,6 +68,40 @@ describe("tarefa.listar", () => {
     expect(terceira.nextCursor).toBeNull();
     expect(terceira.total).toBe(4);
   });
+
+  it("conta as tarefas concluídas", async () => {
+    const { id } = await api.criar({ titulo: "Feita" });
+    await api.criar({ titulo: "Pendente" });
+    await api.atualizar({ id, concluida: true });
+
+    expect(await api.listar({ limit: 10 })).toMatchObject({
+      total: 2,
+      concluidas: 1,
+    });
+  });
+
+  it.each([
+    ["todas", ["Pendente", "Feita"]],
+    ["pendentes", ["Pendente"]],
+    ["concluidas", ["Feita"]],
+  ] as const)("filtra por %s", async (filtro, esperadas) => {
+    const { id } = await api.criar({ titulo: "Feita" });
+    await api.criar({ titulo: "Pendente" });
+    await api.atualizar({ id, concluida: true });
+
+    const pagina = await api.listar({ filtro, limit: 10 });
+
+    expect(pagina.itens.map((t) => t.titulo)).toEqual(esperadas);
+    expect(pagina).toMatchObject({ total: 2, concluidas: 1 });
+  });
+
+  it("rejeita filtro desconhecido", async () => {
+    expect(
+      await codigoDoErro(
+        api.listar({ filtro: "arquivadas" as never, limit: 10 }),
+      ),
+    ).toBe("BAD_REQUEST");
+  });
 });
 
 describe("tarefa.atualizar", () => {
@@ -97,6 +132,15 @@ describe("tarefa.atualizar", () => {
     ).toBe("NOT_FOUND");
   });
 
+  it("marca e desmarca como concluída", async () => {
+    const { id } = await api.criar({ titulo: "Tarefa" });
+
+    expect((await api.atualizar({ id, concluida: true })).concluida).toBe(true);
+    expect((await api.atualizar({ id, concluida: false })).concluida).toBe(
+      false,
+    );
+  });
+
   it("rejeita título vazio", async () => {
     const { id } = await api.criar({ titulo: "Tarefa" });
     expect(await codigoDoErro(api.atualizar({ id, titulo: "" }))).toBe(
@@ -105,7 +149,7 @@ describe("tarefa.atualizar", () => {
   });
 });
 
-describe("tarefa.deletar e buscarPorId", () => {
+describe("tarefa.deletar, restaurar e buscarPorId", () => {
   it("remove a tarefa", async () => {
     const { id } = await api.criar({ titulo: "Temporária" });
 
@@ -117,5 +161,20 @@ describe("tarefa.deletar e buscarPorId", () => {
     expect(await codigoDoErro(api.deletar({ id: "inexistente" }))).toBe(
       "NOT_FOUND",
     );
+  });
+
+  it("restaura a tarefa excluída na mesma posição", async () => {
+    const antiga = await api.criar({ titulo: "Antiga" });
+    await api.criar({ titulo: "Nova" });
+    await api.deletar({ id: antiga.id });
+
+    expect(await api.restaurar({ id: antiga.id })).toEqual(antiga);
+    const { itens } = await api.listar({ limit: 10 });
+    expect(itens.map((t) => t.titulo)).toEqual(["Nova", "Antiga"]);
+  });
+
+  it("retorna NOT_FOUND ao restaurar tarefa que não foi excluída", async () => {
+    const { id } = await api.criar({ titulo: "Ativa" });
+    expect(await codigoDoErro(api.restaurar({ id }))).toBe("NOT_FOUND");
   });
 });

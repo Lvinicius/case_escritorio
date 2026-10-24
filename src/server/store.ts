@@ -1,6 +1,7 @@
 import { randomUUID } from "node:crypto";
 import type {
   AtualizarTarefaInput,
+  Filtro,
   ListarTarefasInput,
   TarefaInput,
 } from "@/lib/schemas";
@@ -9,6 +10,7 @@ export type Tarefa = {
   id: string;
   titulo: string;
   descricao?: string;
+  concluida: boolean;
   dataCriacao: Date;
 };
 
@@ -16,17 +18,20 @@ export type PaginaDeTarefas = {
   itens: Tarefa[];
   nextCursor: number | null;
   total: number;
+  concluidas: number;
 };
 
 export class TarefaStore {
   private tarefas = new Map<string, Tarefa>();
+  // Guardadas para permitir desfazer a exclusão.
+  private removidas = new Map<string, Tarefa>();
   private ultimaCriacao = 0;
 
-  list({ cursor, limit }: ListarTarefasInput): PaginaDeTarefas {
+  list({ cursor, filtro, limit }: ListarTarefasInput): PaginaDeTarefas {
     const todas = [...this.tarefas.values()];
-    const recentesPrimeiro = todas.sort(
-      (a, b) => b.dataCriacao.getTime() - a.dataCriacao.getTime(),
-    );
+    const recentesPrimeiro = todas
+      .filter(atendeAoFiltro[filtro])
+      .sort((a, b) => b.dataCriacao.getTime() - a.dataCriacao.getTime());
     const restantes =
       cursor == null
         ? recentesPrimeiro
@@ -38,6 +43,7 @@ export class TarefaStore {
       itens,
       nextCursor: temMais ? itens.at(-1)!.dataCriacao.getTime() : null,
       total: todas.length,
+      concluidas: todas.filter((t) => t.concluida).length,
     };
   }
 
@@ -50,6 +56,7 @@ export class TarefaStore {
       id: randomUUID(),
       titulo,
       descricao: descricao || undefined,
+      concluida: false,
       dataCriacao: this.proximaData(),
     };
     this.tarefas.set(tarefa.id, tarefa);
@@ -68,7 +75,21 @@ export class TarefaStore {
   }
 
   remove(id: string) {
-    return this.tarefas.delete(id);
+    const tarefa = this.tarefas.get(id);
+    if (!tarefa) return false;
+
+    this.tarefas.delete(id);
+    this.removidas.set(id, tarefa);
+    return true;
+  }
+
+  restore(id: string) {
+    const tarefa = this.removidas.get(id);
+    if (!tarefa) return undefined;
+
+    this.removidas.delete(id);
+    this.tarefas.set(id, tarefa);
+    return tarefa;
   }
 
   // Datas estritamente crescentes tornam dataCriacao um cursor único e estável,
@@ -78,6 +99,12 @@ export class TarefaStore {
     return new Date(this.ultimaCriacao);
   }
 }
+
+const atendeAoFiltro: Record<Filtro, (tarefa: Tarefa) => boolean> = {
+  todas: () => true,
+  pendentes: (tarefa) => !tarefa.concluida,
+  concluidas: (tarefa) => tarefa.concluida,
+};
 
 // Mantém os dados entre os hot reloads do `next dev`.
 const globalComStore = globalThis as typeof globalThis & {

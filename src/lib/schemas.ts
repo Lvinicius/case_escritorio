@@ -15,14 +15,21 @@ export const tarefaInput = z.object({
 
 export const idInput = z.object({ id: z.string().min(1) });
 
-export const atualizarTarefaInput = tarefaInput.partial().extend(idInput.shape);
+export const atualizarTarefaInput = tarefaInput
+  .partial()
+  .extend({ ...idInput.shape, concluida: z.boolean().optional() });
+
+export const FILTROS = ["todas", "pendentes", "concluidas"] as const;
+export const filtroInput = z.enum(FILTROS);
 
 export const listarTarefasInput = z.object({
   cursor: z.number().nullish(),
+  filtro: filtroInput.default("todas"),
   limit: z.number().int().min(1).max(50).default(10),
 });
 
 export type TarefaInput = z.infer<typeof tarefaInput>;
 export type AtualizarTarefaInput = z.infer<typeof atualizarTarefaInput>;
 export type ListarTarefasInput = z.infer<typeof listarTarefasInput>;
+export type Filtro = z.infer<typeof filtroInput>;
 export type CamposComErro = Partial<Record<keyof TarefaInput, string[]>>;

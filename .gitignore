@@ -10,6 +10,10 @@ next-env.d.ts
 
 # testes
 /coverage
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/
 
 # variáveis de ambiente e chaves
 .env*

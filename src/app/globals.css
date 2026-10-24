@@ -1,6 +1,8 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 :root {
   --radius: 0.75rem;
   --background: oklch(0.985 0.003 265);
@@ -17,6 +19,20 @@
   --border: oklch(0.92 0.008 265);
   --input: oklch(0.9 0.01 265);
   --ring: oklch(0.6 0.2 277);
+}
+
+.dark {
+  --background: oklch(0.16 0.015 265);
+  --foreground: oklch(0.96 0.005 265);
+  --card: oklch(0.21 0.018 265);
+  --primary: oklch(0.65 0.2 277);
+  --muted: oklch(0.26 0.018 265);
+  --muted-foreground: oklch(0.7 0.02 265);
+  --accent: oklch(0.3 0.06 277);
+  --accent-foreground: oklch(0.9 0.05 277);
+  --destructive: oklch(0.65 0.2 25);
+  --border: oklch(1 0 0 / 10%);
+  --input: oklch(1 0 0 / 15%);
 }
 
 @theme inline {
